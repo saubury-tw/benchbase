@@ -288,7 +288,7 @@ public abstract class RevisionHistograms {
     /**
      *
      */
-    public static final int[] REVISION_DELTA_SIZES = {1000, 10000, 100000};
+    public static final int[] REVISION_DELTA_SIZES = {1000, 10000, 50000};
 
     /**
      *
