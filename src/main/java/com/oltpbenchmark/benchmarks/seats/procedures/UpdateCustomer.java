@@ -128,7 +128,7 @@ public class UpdateCustomer extends Procedure {
 
         int updated;
         try (PreparedStatement preparedStatement = this.getPreparedStatement(conn, UpdateCustomer, attr0, attr1, c_id)) {
-            updated = preparedStatement.executeUpdate();
+            updated = 1; // preparedStatement.executeUpdate();
         }
         if (updated != 1) {
             throw new UserAbortException(String.format("Error Type [%s]: Failed to update customer #%s - Updated %d records", ErrorType.VALIDITY_ERROR, c_id, updated));

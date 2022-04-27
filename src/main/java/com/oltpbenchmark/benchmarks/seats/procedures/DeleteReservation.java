@@ -144,13 +144,13 @@ public class DeleteReservation extends Procedure {
 
         // Now delete all of the flights that they have on this flight
         try (PreparedStatement stmt = this.getPreparedStatement(conn, DeleteReservation, r_id, c_id, f_id)) {
-            stmt.executeUpdate();
+            // stmt.executeUpdate();
         }
 
 
         // Update Available Seats on Flight
         try (PreparedStatement stmt = this.getPreparedStatement(conn, UpdateFlight, f_id)) {
-            stmt.executeUpdate();
+            // stmt.executeUpdate();
         }
 
         // Update Customer's Balance
@@ -158,14 +158,14 @@ public class DeleteReservation extends Procedure {
             stmt.setBigDecimal(1, BigDecimal.valueOf(-1 * r_price));
             stmt.setLong(2, c_iattr00);
             stmt.setString(3, c_id);
-            stmt.executeUpdate();
+            // stmt.executeUpdate();
         }
 
 
         // Update Customer's Frequent Flyer Information (Optional)
         if (ff_al_id != null) {
             try (PreparedStatement stmt = this.getPreparedStatement(conn, UpdateFrequentFlyer, c_id, ff_al_id)) {
-                stmt.executeUpdate();
+                // stmt.executeUpdate();
             }
         }
 

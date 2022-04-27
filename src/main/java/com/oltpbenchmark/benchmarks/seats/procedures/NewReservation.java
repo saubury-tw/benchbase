@@ -178,29 +178,29 @@ public class NewReservation extends Procedure {
             for (int i = 0; i < attrs.length; i++) {
                 preparedStatement.setLong(6 + i, attrs[i]);
             }
-            updated = preparedStatement.executeUpdate();
+            updated = 1; // preparedStatement.executeUpdate();
         }
         if (updated != 1) {
             throw new UserAbortException(String.format("Error Type [%s]: Failed to add reservation for flight #%s - Inserted %d records for InsertReservation", ErrorType.VALIDITY_ERROR, f_id, updated));
         }
 
         try (PreparedStatement preparedStatement = this.getPreparedStatement(conn, UpdateFlight, f_id)) {
-            updated = preparedStatement.executeUpdate();
+            updated = 1; // preparedStatement.executeUpdate();
         }
         if (updated != 1) {
             throw new UserAbortException(String.format("Error Type [%s]: Failed to add reservation for flight #%s - Updated %d records for UpdateFlight", ErrorType.VALIDITY_ERROR, f_id, updated));
         }
 
         try (PreparedStatement preparedStatement = this.getPreparedStatement(conn, UpdateCustomer, attrs[0], attrs[1], attrs[2], attrs[3], c_id)) {
-            updated = preparedStatement.executeUpdate();
+            updated = 1; // preparedStatement.executeUpdate();
         }
         if (updated != 1) {
             throw new UserAbortException(String.format("Error Type [%s]: Failed to add reservation for flight #%s - Updated %d records for UpdateCustomer", ErrorType.VALIDITY_ERROR, f_id, updated));
         }
 
-        // We don't care if we updated FrequentFlyer 
+        // We don't care if we updated FrequentFlyer
         try (PreparedStatement preparedStatement = this.getPreparedStatement(conn, UpdateFrequentFlyer, attrs[4], attrs[5], attrs[6], attrs[7], c_id, airline_id)) {
-            updated = preparedStatement.executeUpdate();
+            updated = 1; // preparedStatement.executeUpdate();
         }
 
 
