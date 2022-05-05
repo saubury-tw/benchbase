@@ -282,3 +282,12 @@ CREATE TABLE reservation (
     FOREIGN KEY (r_c_id) REFERENCES customer (c_id),
     FOREIGN KEY (r_f_id) REFERENCES flight (f_id)
 );
+
+-- added 5/5/2022 for YDB
+create index on flight (f_arrive_ap_id, f_depart_ap_id);
+
+
+drop index f_depart_time_idx;
+
+CREATE INDEX f_depart_time_idx ON flight (f_depart_time asc);
+
