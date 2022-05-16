@@ -283,19 +283,11 @@ CREATE TABLE reservation (
     FOREIGN KEY (r_f_id) REFERENCES flight (f_id)
 );
 
--- -- added 5/5/2022 for YDB
--- create index on flight (f_arrive_ap_id, f_depart_ap_id);
 
 
--- drop index f_depart_time_idx;
-
--- CREATE INDEX f_depart_time_idx ON flight (f_depart_time asc);
-
+-- Index as suggested by YDB
+-- create index idx_yb_1       ON flight (f_arrive_ap_id, f_depart_ap_id, f_depart_time);
 
 
--- -- We can drop the above two indexes:
--- drop index flight_f_arrive_ap_id_f_depart_ap_id_idx;
--- drop index f_depart_time_idx;
-
---2. We need only one index.
-create index idx_yb_1 ON flight (f_arrive_ap_id, f_depart_ap_id, f_depart_time);
+-- Index found in src/main/resources/benchmarks/seats/ddl-cockroachdb.sql
+CREATE INDEX f_compound_idx ON flight (f_depart_time, f_al_id, f_depart_ap_id, f_arrive_ap_id);
